@@ -649,7 +649,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "pycrfsuite/_pycrfsuite.pyx",
+  "pycrfsuite\\_pycrfsuite.pyx",
   "stringsource",
 };
 
@@ -1522,8 +1522,8 @@ static const char __pyx_k_Trainer_on_optimization_end[] = "Trainer.on_optimizati
 static const char __pyx_k_feature_possible_transitions[] = "feature.possible_transitions";
 static const char __pyx_k_Return_a_list_of_prepared_item[] = "\n        Return a list of prepared item features:\n        a list of ``{unicode_key: float_value}`` dicts.\n\n        >>> ItemSequence([[\"foo\"], {\"bar\": {\"baz\": 1}}]).items()\n        [{'foo': 1.0}, {'bar:baz': 1.0}]\n\n        ";
 static const char __pyx_k_The_trainer_class_This_class_ma[] = "\n    The trainer class.\n\n    This class maintains a data set for training, and provides an interface\n    to various training algorithms.\n\n    Parameters\n    ----------\n    algorithm : {'lbfgs', 'l2sgd', 'ap', 'pa', 'arow'}\n        The name of the training algorithm. See :meth:`Trainer.select`.\n\n    params : dict, optional\n        Training parameters. See :meth:`Trainer.set_params`\n        and :meth:`Trainer.set`.\n\n    verbose : boolean\n        Whether to print debug messages during training. Default is True.\n\n    ";
-static const char __pyx_k_Users_kmike_svn_python_crfsuite[] = "/Users/kmike/svn/python-crfsuite/pycrfsuite/_pycrfsuite.pyx";
 static const char __pyx_k_Bad_arguments_algorithm_r_type_r[] = "Bad arguments: algorithm=%r, type=%r";
+static const char __pyx_k_E_Projetos_Meus_Projetos_Cangote[] = "E:\\Projetos\\Meus Projetos\\Cangote\\Escavador\\python-crfsuite\\pycrfsuite\\_pycrfsuite.pyx";
 static const char __pyx_k_Model_file_r_doesn_t_have_a_comp[] = "Model file %r doesn't have a complete header";
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_n_s_ALGORITHM_ALIASES;
@@ -1532,6 +1532,7 @@ static PyObject *__pyx_n_s_CRFSUITE_VERSION;
 static PyObject *__pyx_n_s_CRFSuiteError;
 static PyObject *__pyx_n_s_CRFSuiteError___init;
 static PyObject *__pyx_n_s_CRFsuiteDumpParser;
+static PyObject *__pyx_kp_s_E_Projetos_Meus_Projetos_Cangote;
 static PyObject *__pyx_kp_s_Error_opening_model_file_r;
 static PyObject *__pyx_kp_s_Incompatible_data;
 static PyObject *__pyx_kp_s_Insufficient_memory;
@@ -1566,7 +1567,6 @@ static PyObject *__pyx_kp_s_Unexpected_error;
 static PyObject *__pyx_kp_s_Unknown_error_occurred;
 static PyObject *__pyx_kp_s_Unknown_event_r;
 static PyObject *__pyx_kp_s_Unsupported_operation;
-static PyObject *__pyx_kp_s_Users_kmike_svn_python_crfsuite;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_kp_b__8;
 static PyObject *__pyx_n_s_algorithm;
@@ -11433,6 +11433,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_CRFSuiteError, __pyx_k_CRFSuiteError, sizeof(__pyx_k_CRFSuiteError), 0, 0, 1, 1},
   {&__pyx_n_s_CRFSuiteError___init, __pyx_k_CRFSuiteError___init, sizeof(__pyx_k_CRFSuiteError___init), 0, 0, 1, 1},
   {&__pyx_n_s_CRFsuiteDumpParser, __pyx_k_CRFsuiteDumpParser, sizeof(__pyx_k_CRFsuiteDumpParser), 0, 0, 1, 1},
+  {&__pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_k_E_Projetos_Meus_Projetos_Cangote, sizeof(__pyx_k_E_Projetos_Meus_Projetos_Cangote), 0, 0, 1, 0},
   {&__pyx_kp_s_Error_opening_model_file_r, __pyx_k_Error_opening_model_file_r, sizeof(__pyx_k_Error_opening_model_file_r), 0, 0, 1, 0},
   {&__pyx_kp_s_Incompatible_data, __pyx_k_Incompatible_data, sizeof(__pyx_k_Incompatible_data), 0, 0, 1, 0},
   {&__pyx_kp_s_Insufficient_memory, __pyx_k_Insufficient_memory, sizeof(__pyx_k_Insufficient_memory), 0, 0, 1, 0},
@@ -11467,7 +11468,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unknown_error_occurred, __pyx_k_Unknown_error_occurred, sizeof(__pyx_k_Unknown_error_occurred), 0, 0, 1, 0},
   {&__pyx_kp_s_Unknown_event_r, __pyx_k_Unknown_event_r, sizeof(__pyx_k_Unknown_event_r), 0, 0, 1, 0},
   {&__pyx_kp_s_Unsupported_operation, __pyx_k_Unsupported_operation, sizeof(__pyx_k_Unsupported_operation), 0, 0, 1, 0},
-  {&__pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_k_Users_kmike_svn_python_crfsuite, sizeof(__pyx_k_Users_kmike_svn_python_crfsuite), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_kp_b__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 0, 0},
   {&__pyx_n_s_algorithm, __pyx_k_algorithm, sizeof(__pyx_k_algorithm), 0, 0, 1, 1},
@@ -11668,7 +11668,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__6 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_code); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_init, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_init, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 32, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":197
  * 
@@ -11680,7 +11680,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_txt); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_intbool, 197, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_intbool, 197, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 197, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":495
  *     logparser = None
@@ -11692,7 +11692,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_before_train, 495, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_before_train, 495, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 495, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":498
  *         self.logparser = _logparser.TrainLogParser()
@@ -11704,7 +11704,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__13 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_message, __pyx_n_s_event, __pyx_n_s_log); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_message, 498, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 498, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_message, 498, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 498, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":524
  *             raise Exception("Unknown event %r" % event)
@@ -11716,7 +11716,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__15 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 524, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_start, 524, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 524, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_start, 524, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 524, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":527
  *         print(log, end='')
@@ -11728,7 +11728,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__17 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_log, __pyx_n_s_percent); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_featgen_progress, 527, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 527, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_featgen_progress, 527, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 527, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":530
  *         print(log, end='')
@@ -11740,7 +11740,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 530, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_featgen_end, 530, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 530, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_featgen_end, 530, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 530, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":533
  *         print(log, end='')
@@ -11752,7 +11752,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__21 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 533, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_prepared, 533, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_prepared, 533, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 533, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":536
  *         print(log, end='')
@@ -11764,7 +11764,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__23 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 536, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_prepare_error, 536, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 536, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_prepare_error, 536, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 536, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":539
  *         print(log, end='')
@@ -11776,7 +11776,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__25 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_log, __pyx_n_s_info); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_iteration, 539, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 539, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_iteration, 539, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 539, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":542
  *         print(log, end='')
@@ -11788,7 +11788,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__27 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 542, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_optimization_end, 542, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 542, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_optimization_end, 542, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 542, __pyx_L1_error)
 
   /* "pycrfsuite/_pycrfsuite.pyx":545
  *         print(log, end='')
@@ -11800,7 +11800,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_log); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_kmike_svn_python_crfsuite, __pyx_n_s_on_end, 545, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_E_Projetos_Meus_Projetos_Cangote, __pyx_n_s_on_end, 545, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 545, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
