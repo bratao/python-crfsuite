@@ -13,13 +13,10 @@ sources += glob.glob('crfsuite/swig/*.cpp')
 sources += ['crfsuite/lib/cqdb/src/cqdb.c']
 sources += ['crfsuite/lib/cqdb/src/lookup3.c']
 
-# lbfgs
-sources += glob.glob('liblbfgs/lib/*.c')
 
 includes = [
     'crfsuite/include/',
     'crfsuite/lib/cqdb/include',
-    'liblbfgs/include',
     'pycrfsuite',
 ]
 
@@ -28,10 +25,10 @@ class build_ext_check_gcc(build_ext):
         c = self.compiler
         if c.compiler_type == 'unix' and 'gcc' in c.compiler:
             for e in self.extensions:
-                e.extra_compile_args=['-std=c99']
+                e.extra_compile_args=['-std=c99', '-fopenmp', '-DUSE_SSE']
         elif self.compiler.compiler_type == "msvc":
-            if sys.version_info[:2] < (3, 5):
-                c.include_dirs.extend(['crfsuite/win32'])
+            for e in self.extensions:
+                e.extra_compile_args=['/D', '"USE_SSE"', '/openmp']
                 
         build_ext.build_extensions(self)
 
@@ -44,14 +41,14 @@ ext_modules = [Extension('pycrfsuite._pycrfsuite',
 
 
 setup(
-    name='python-crfsuite',
-    version="0.9.6",
-    description="Python binding for CRFsuite",
+    name='python-crfsuite-openmp',
+    version="0.9.7",
+    description="Python binding for CRFsuite wih openmp build",
     long_description=open('README.rst').read(),
     author="Terry Peng, Mikhail Korobov",
     author_email="pengtaoo@gmail.com, kmike84@gmail.com",
     license="MIT",
-    url='https://github.com/scrapinghub/python-crfsuite',
+    url='https://github.com/bratao/python-crfsuite',
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
