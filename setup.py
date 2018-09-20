@@ -23,16 +23,16 @@ includes = [
     'pycrfsuite',
 ]
 
-if sys.platform == 'win32':
-    includes.extend(['crfsuite/win32', 'include'])
-
-
 class build_ext_check_gcc(build_ext):
     def build_extensions(self):
         c = self.compiler
         if c.compiler_type == 'unix' and 'gcc' in c.compiler:
             for e in self.extensions:
                 e.extra_compile_args=['-std=c99']
+        elif self.compiler.compiler_type == "msvc":
+            if sys.version_info[:2] < (3, 5):
+                c.include_dirs.extend(['crfsuite/win32'])
+                
         build_ext.build_extensions(self)
 
 
@@ -45,11 +45,12 @@ ext_modules = [Extension('pycrfsuite._pycrfsuite',
 
 setup(
     name='python-crfsuite',
-    version="0.9.3-bru",
+    version="0.9.6",
     description="Python binding for CRFsuite",
     long_description=open('README.rst').read(),
     author="Terry Peng, Mikhail Korobov",
     author_email="pengtaoo@gmail.com, kmike84@gmail.com",
+    license="MIT",
     url='https://github.com/scrapinghub/python-crfsuite',
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -61,9 +62,10 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Software Development",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Scientific/Engineering",

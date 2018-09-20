@@ -1,6 +1,38 @@
 Changes
 =======
 
+0.9.6 (2018-08-01)
+------------------
+
+* Python 3.7 support (thanks @fgregg, @danmacnaughtan and @fuhrysteve).
+* Python 3.3 support is dropped.
+* new Tagger.open_inmemory method which allows to load tagger data
+  without having a file on-disk (thanks @lucywang000).
+* license information is added to setup.py (thanks @nils-werner).
+
+0.9.5 (2017-09-05)
+------------------
+
+* Python 3.6 wheels for Windows (thanks @fgregg).
+
+0.9.4 (2017-09-04)
+------------------
+
+* Packaging fix (thanks @fgregg).
+
+0.9.3 (2017-09-03)
+------------------
+
+* Fixed compatibility with Python 3.5+ on Windows (thanks @fgregg);
+* CRFSuite C++ library is updated to latest version, this fixes several
+  memory leaks and improves performance (thanks @fgregg);
+* extension is rebuilt with Cython 0.26.1.
+
+0.9.2 (2017-05-04)
+------------------
+
+* binary wheels for OS X and Linux (thanks @jeancochrane).
+
 0.9.1 (2016-12-19)
 ------------------
 
