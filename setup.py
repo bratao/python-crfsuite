@@ -45,8 +45,8 @@ setup(
     version="0.9.7",
     description="Python binding for CRFsuite wih openmp build",
     long_description=open('README.rst').read(),
-    author="Terry Peng, Mikhail Korobov",
-    author_email="pengtaoo@gmail.com, kmike84@gmail.com",
+    author="Bruno Cabral, Terry Peng, Mikhail Korobov",
+    author_email="brunp@potelo.com.br, pengtaoo@gmail.com, kmike84@gmail.com",
     license="MIT",
     url='https://github.com/bratao/python-crfsuite',
     classifiers=[
