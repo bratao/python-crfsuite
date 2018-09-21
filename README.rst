@@ -1,22 +1,16 @@
 ===============
-python-crfsuite
+python-crfsuite-openmp
 ===============
 
-.. image:: https://travis-ci.org/scrapinghub/python-crfsuite.svg?branch=master
-    :target: https://travis-ci.org/scrapinghub/python-crfsuite
+.. image:: https://travis-ci.org/bratao/python-crfsuite.svg?branch=master
+    :target: https://travis-ci.org/bratao/python-crfsuite
 
-.. image:: https://ci.appveyor.com/api/projects/status/uaq4sw8tc0oojr4v?svg=true
-    :target: https://ci.appveyor.com/project/kmike/python-crfsuite-mhi5h
-
-.. image:: https://img.shields.io/pypi/v/python-crfsuite.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/python-crfsuite
+.. image:: https://img.shields.io/pypi/v/python-crfsuite-openmp.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/python-crfsuite-openmp
     :alt: pypi Version
 
-.. image:: https://anaconda.org/conda-forge/python-crfsuite/badges/version.svg
-    :target: https://anaconda.org/conda-forge/python-crfsuite
-    :alt: conda Version
 
-python-crfsuite is a python binding to CRFsuite_.
+python-crfsuite-open is fork of python-crfsuite with OpenMP support enabled, a (Even more) FAST sequential tagger
 
 Installation
 ============

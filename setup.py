@@ -23,9 +23,10 @@ includes = [
 class build_ext_check_gcc(build_ext):
     def build_extensions(self):
         c = self.compiler
-        if 'gcc' in c.compiler:
+        print(self.compiler.compiler_type)
+        if self.compiler.compiler_type == "unix":
             for e in self.extensions:
-                e.extra_compile_args=['-std=c99', '-fopenmp', '-DUSE_SSE']
+                e.extra_compile_args=['-std=c99', '-fopenmp', '-DUSE_SSE', '-DWITH_SSE2', '-DHAVE_EMMINTRIN_H', '-mms-bitfields', '-fno-strict-aliasing', '-march=core2', '-msse2']
         elif self.compiler.compiler_type == "msvc":
             for e in self.extensions:
                 e.extra_compile_args=['/D', '"USE_SSE"', '/openmp']
@@ -42,7 +43,7 @@ ext_modules = [Extension('pycrfsuite._pycrfsuite',
 
 setup(
     name='python-crfsuite-openmp',
-    version="0.9.8",
+    version="0.9.9",
     description="Python binding for CRFsuite wih openmp build",
     long_description=open('README.rst').read(),
     author="Bruno Cabral, Terry Peng, Mikhail Korobov",
@@ -74,3 +75,4 @@ setup(
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext_check_gcc}
 )
+
