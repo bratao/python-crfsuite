@@ -42,7 +42,7 @@ ext_modules = [Extension('pycrfsuite._pycrfsuite',
 
 setup(
     name='python-crfsuite-openmp',
-    version="0.9.7",
+    version="0.9.8",
     description="Python binding for CRFsuite wih openmp build",
     long_description=open('README.rst').read(),
     author="Bruno Cabral, Terry Peng, Mikhail Korobov",
