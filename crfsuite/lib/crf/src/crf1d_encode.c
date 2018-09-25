@@ -465,6 +465,19 @@ crf1de_set_data(
     logging(lg, "feature.possible_states: %d\n", opt->feature_possible_states);
     logging(lg, "feature.possible_transitions: %d\n", opt->feature_possible_transitions);
     begin = clock();
+
+	logging(lg, "creating pattern features... \n");
+
+	crf1df_apply_pattern(
+		&crf1de->num_features,
+		ds,
+		L,
+		A,
+		lg->func,
+		lg->instance
+	);
+
+
     crf1de->features = crf1df_generate(
         &crf1de->num_features,
         ds,

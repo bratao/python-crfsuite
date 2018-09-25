@@ -151,6 +151,42 @@ featureset_generate(
 }
 
 
+void crf1df_apply_pattern(int *ptr_num_features,
+    dataset_t *ds,
+    int num_labels,
+    int num_attributes,
+    crfsuite_logging_callback func,
+    void *instance)
+{
+	int c, i, j, s, t;
+	crf1df_feature_t f;
+	crf1df_feature_t *features = NULL;
+	featureset_t* set = NULL;
+	const int N = ds->num_instances;
+	const int L = num_labels;
+	logging_t lg;
+
+	lg.func = func;
+	lg.instance = instance;
+	lg.percent = 0;
+
+	for (s = 0;s < N;++s) {
+		int prev = L, cur = 0;
+		const crfsuite_item_t* item = NULL;
+		const crfsuite_instance_t* seq = dataset_get(ds, s);
+		const int T = seq->num_items;
+
+		/* Loop over the items in the sequence. */
+		for (t = 0;t < T;++t) {
+			item = &seq->items[t];
+			cur = seq->labels[t];
+
+		}
+	}
+
+
+}
+
 
 crf1df_feature_t* crf1df_generate(
     int *ptr_num_features,

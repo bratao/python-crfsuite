@@ -272,6 +272,14 @@ typedef struct {
     int*    fids;            /**< Array of feature ids */
 } feature_refs_t;
 
+
+void crf1df_apply_pattern(int *ptr_num_features,
+	dataset_t *ds,
+	int num_labels,
+	int num_attributes,
+	crfsuite_logging_callback func,
+	void *instance);
+
 crf1df_feature_t* crf1df_generate(
     int *ptr_num_features,
     dataset_t *ds,

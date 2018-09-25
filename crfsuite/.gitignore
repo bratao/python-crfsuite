@@ -3,6 +3,7 @@
 **/*.la
 **/*.lo
 **/*.o
+**/*.obj
 **/setup.py
 **/Makefile*
 autom4te.cache
@@ -18,3 +19,5 @@ libtool
 ltmain.sh
 missing
 stamp-h1
+/Release
+/Debug

@@ -10,3 +10,4 @@ MANIFEST
 conll2002-esp.crfsuite
 *.egg-info/
 .cache
+*.obj

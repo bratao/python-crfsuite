@@ -159,6 +159,13 @@ cdef class ItemSequence(object):
     def __init__(self, pyseq):
         self.c_seq = to_seq(pyseq)
 
+    def append(self, x):
+        """
+        Append a item to the existing ItemSequence
+        """
+        self.c_seq.push_back(to_item(x))
+
+
     def items(self):
         """
         Return a list of prepared item features:
