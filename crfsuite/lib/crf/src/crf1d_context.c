@@ -156,7 +156,7 @@ void crf1dc_reset(crf1d_context_t* ctx, int flag)
         veczero(ctx->state, T*L);
     }
     if (flag & RF_TRANS) {
-        veczero(ctx->trans, L*L);
+        vecset(ctx->trans,0.0f, L*L);
     }
 
     if (ctx->flag & CTXF_MARGINALS) {
@@ -498,7 +498,8 @@ floatval_t crf1dc_viterbi(crf1d_context_t* ctx, int *labels)
             for (i = 0;i < L;++i) {
                 /* Transit from (t-1, i) to (t, j). */
                 trans = TRANS_SCORE(ctx, i);
-                score = prev[i] + trans[j];
+
+				score = prev[i] + trans[j];
 
                 /* Store this path if it has the maximum score. */
                 if (max_score < score) {

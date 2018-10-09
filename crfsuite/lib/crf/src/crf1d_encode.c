@@ -427,7 +427,8 @@ crf1de_set_data(
     dataset_t *ds,
     int num_labels,
     int num_attributes,
-    logging_t *lg
+    logging_t *lg, 
+	int *observed_transitions
     )
 {
     int i, ret = 0;
@@ -477,6 +478,7 @@ crf1de_set_data(
 		lg->instance
 	);
 
+	
 
     crf1de->features = crf1df_generate(
         &crf1de->num_features,
@@ -487,7 +489,8 @@ crf1de_set_data(
         opt->feature_possible_transitions ? 1 : 0,
         opt->feature_minfreq,
         lg->func,
-        lg->instance
+        lg->instance,
+		observed_transitions
         );
     if (crf1de->features == NULL) {
         ret = CRFSUITEERR_OUTOFMEMORY;
@@ -524,7 +527,8 @@ crf1de_save_model(
     const floatval_t *w,
     crfsuite_dictionary_t *attrs,
     crfsuite_dictionary_t *labels,
-    logging_t *lg
+    logging_t *lg, 
+	int *observed_transitions
     )
 {
     int a, k, l, ret;
@@ -538,12 +542,25 @@ crf1de_save_model(
     const int K = crf1de->num_features;
     int J = 0, B = 0;
 
+	/* Get number of not seen transitions */
+	int num_of_unobserved_transitions = 0;
+	for (int i = 0;i < L;++i) {
+		for (int j = 0;j < L;++j) {
+			if(observed_transitions[i*L + j] == 0){
+				num_of_unobserved_transitions++;
+			}
+		}
+	}
+
+	// Create the array to hold the feature id position
+	int *fid_map_unobserved = (int*)calloc(num_of_unobserved_transitions, sizeof(int));
+
     /* Start storing the model. */
     logging(lg, "Storing the model\n");
     begin = clock();
 
     /* Allocate and initialize the feature mapping. */
-    fmap = (int*)calloc(K, sizeof(int));
+    fmap = (int*)calloc(K + num_of_unobserved_transitions, sizeof(int));
     if (fmap == NULL) {
         goto error_exit;
     }
@@ -551,7 +568,7 @@ crf1de_save_model(
     for (k = 0;k < K;++k) fmap[k] = k;
     J = K;
 #else
-    for (k = 0;k < K;++k) fmap[k] = -1;
+    for (k = 0;k < K + num_of_unobserved_transitions;++k) fmap[k] = -1;
 #endif/*CRF_TRAIN_SAVE_NO_PRUNING*/
 
     /* Allocate and initialize the attribute mapping. */
@@ -615,12 +632,41 @@ crf1de_save_model(
         }
     }
 
+	/*
+	 *  Write all the unseen transitions
+	 */
+	
+	int u = 0;
+	for (int i = 0;i < L;++i) {
+		for (int j = 0;j < L;++j) {
+			if (observed_transitions[i*L + j] == 0) {
+				crf1dm_feature_t feat;
+				int write_pos = k + u;
+				fmap[write_pos] = J++;   
+				fid_map_unobserved[u] = fmap[write_pos];
+				u++;
+
+				feat.type = FT_TRANS;
+				feat.src = i;
+				feat.dst = j;
+				feat.weight = -10.0;
+
+				//Write the feature
+				if (ret = crf1dmw_put_feature(writer, fmap[write_pos], &feat)) {
+					goto error_exit;
+				}
+
+			}
+		}
+	}
+	
+
     /* Close the feature chunk. */
     if (ret = crf1dmw_close_features(writer)) {
         goto error_exit;
     }
 
-    logging(lg, "Number of active features: %d (%d)\n", J, K);
+    logging(lg, "Number of active features: %d (%d)\n", J, K+num_of_unobserved_transitions);
     logging(lg, "Number of active attributes: %d (%d)\n", B, A);
     logging(lg, "Number of active labels: %d (%d)\n", L, L);
 
@@ -671,7 +717,7 @@ crf1de_save_model(
     }
     for (l = 0;l < L;++l) {
         edge = TRANSITION(crf1de, l);
-        if (ret = crf1dmw_put_labelref(writer, l, edge, fmap)) {
+        if (ret = crf1dmw_put_labelref(writer, l, edge, fmap, num_of_unobserved_transitions, fid_map_unobserved)) {
             goto error_exit;
         }
     }
@@ -731,7 +777,7 @@ static int crf1de_exchange_options(crfsuite_params_t* params, crf1de_option_t* o
             )
         DDX_PARAM_INT(
             "feature.possible_transitions", opt->feature_possible_transitions, 0,
-            "Force to generate possible transition features."
+            "Force to generate possible transition features. If not set, we're going to HEAVLY penalize unseen transitions"
             )
     END_PARAM_MAP()
 
@@ -809,12 +855,21 @@ static int encoder_initialize(encoder_t *self, dataset_t *ds, logging_t *lg)
     int ret;
     crf1de_t *crf1de = (crf1de_t*)self->internal;
 
+	// [PREDICT-ONLY-SEEN-TRANSITIONS] : Lets store the observed transitions
+	int L = ds->data->labels->num(ds->data->labels);
+	self->observed_transitions = (int*)calloc(L * L, sizeof(int));
+	for (int i = 0;i < L;++i) {
+		for (int j = 0;j < L;++j) {
+			self->observed_transitions[i*L + j] = 0;
+		}
+	}
+
     ret = crf1de_set_data(
         crf1de,
         ds,
         ds->data->labels->num(ds->data->labels),
         ds->data->attrs->num(ds->data->attrs),
-        lg);
+        lg, self->observed_transitions);
     self->ds = ds;
     self->num_features = crf1de->num_features;
     self->cap_items = crf1de->ctx->cap_items;
@@ -889,7 +944,7 @@ static int encoder_features_on_path(encoder_t *self, const crfsuite_instance_t *
 static int encoder_save_model(encoder_t *self, const char *filename, const floatval_t *w, logging_t *lg)
 {
     crf1de_t *crf1de = (crf1de_t*)self->internal;
-    return crf1de_save_model(crf1de, filename, w, self->ds->data->attrs,  self->ds->data->labels, lg);
+    return crf1de_save_model(crf1de, filename, w, self->ds->data->attrs,  self->ds->data->labels, lg, self->observed_transitions);
 }
 
 /* LEVEL_NONE -> LEVEL_WEIGHT. */

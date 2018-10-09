@@ -61,6 +61,7 @@ typedef struct {
     crfsuite_data_t *data;
     int *perm;
     int num_instances;
+
 } dataset_t;
 
 void dataset_init_trainset(dataset_t *ds, crfsuite_data_t *data, int holdout);
@@ -98,6 +99,8 @@ struct tag_encoder
 
     int num_features;
     int cap_items;
+
+	int* observed_transitions; // Track the observed transitions
 
     /**
      * Exchanges options.

@@ -11,3 +11,5 @@ conll2002-esp.crfsuite
 *.egg-info/
 .cache
 *.obj
+/crfsuite/lib/crf/Release
+/crfsuite/lib/crf/Debug

@@ -197,7 +197,8 @@ crf1df_feature_t* crf1df_generate(
     int connect_all_edges,
     floatval_t minfreq,
     crfsuite_logging_callback func,
-    void *instance
+    void *instance,
+	int *observed_transitions
     )
 {
     int c, i, j, s, t;
@@ -218,6 +219,7 @@ crf1df_feature_t* crf1df_generate(
     /* Loop over the sequences in the training data. */
     logging_progress_start(&lg);
 
+
     for (s = 0;s < N;++s) {
         int prev = L, cur = 0;
         const crfsuite_item_t* item = NULL;
@@ -237,6 +239,9 @@ crf1df_feature_t* crf1df_generate(
                 f.dst = cur;
                 f.freq = seq->weight;
                 featureset_add(set, &f);
+
+				//Keep track of observed_transitions
+				observed_transitions[prev*L + cur] = 1;
             }
 
             for (c = 0;c < item->num_contents;++c) {
@@ -271,14 +276,19 @@ crf1df_feature_t* crf1df_generate(
     /* Generate edge features representing all pairs of labels.
        These features are not unobserved in the training data
        (zero expexcations). */
+
     if (connect_all_edges) {
         for (i = 0;i < L;++i) {
             for (j = 0;j < L;++j) {
+
                 f.type = FT_TRANS;
                 f.src = i;
                 f.dst = j;
                 f.freq = 0;
                 featureset_add(set, &f);
+				
+				//Keep track of observed_transitions
+				observed_transitions[i*L + j] = 1;
             }
         }
     }

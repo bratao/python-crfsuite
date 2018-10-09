@@ -12,16 +12,19 @@ python-crfsuite-openmp
 
 python-crfsuite-open is fork of python-crfsuite with OpenMP support enabled, a (Even more) FAST sequential tagger
 
+ChangeLog
+============
+* 1.0.1 - Heavy penalize Unseen transitions
+* 1.0.0 - OpenMP support. Utilize all CPU cores during training
+
 Installation
 ============
 
 Using ``pip``::
 
-    pip install python-crfsuite
+    pip install python-crfsuite-openmp
 
-Using ``conda``::
 
-    conda install -c conda-forge python-crfsuite
 
 Usage
 =====
@@ -74,22 +77,8 @@ Bundled CRFSuite_ C/C++ library is by Naoaki Okazaki & contributors.
 License
 =======
 
-python-crfsuite is licensed under MIT license.
+python-crfsuite-openmp is licensed under MIT license.
 CRFsuite_ library is licensed under BSD license.
 
 .. _CRFsuite: https://github.com/chokkan/crfsuite
 
-Alternatives
-============
-
-* https://github.com/chokkan/crfsuite/tree/master/swig/python - official
-  Python wrapper, exposes C++ API using SWIG.
-* https://github.com/jakevdp/pyCRFsuite - uses C API instead of C++ API;
-  allows to use scipy sparse matrices as an input. At the time of writing
-  it is unmaintained.
-
-This package (python-crfsuite) wraps CRFsuite C++ API using Cython.
-It is faster than official SWIG wrapper and has a simpler codebase than
-a more advanced pyCRFsuite. python-crfsuite works in Python 2 and Python 3,
-doesn't have external dependencies (CRFsuite is bundled, numpy/scipy stack
-is not needed) and workarounds some of the issues with C++ CRFsuite library.
