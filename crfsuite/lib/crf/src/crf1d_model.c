@@ -481,7 +481,7 @@ int crf1dmw_close_labelrefs(crf1dmw_t* writer)
     return 0;
 }
 
-int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, int *map, int num_of_unobserved_transitions, int *fid_map_unobserved)
+int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, int *map, int num_of_labels, int *fid_map_unobserved)
 {
     int i, fid;
     uint32_t n = 0, offset = 0;
@@ -501,6 +501,14 @@ int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, 
         if (0 <= map[ref->fids[i]]) ++n;
     }
 
+	int target_transition = lid;
+	int num_of_unobserved_transitions = 0;
+	for (int j = 0;j < num_of_labels;++j) {
+		if (fid_map_unobserved[target_transition*num_of_labels + j] != -1) {
+			num_of_unobserved_transitions++;
+		}
+	}
+
     /* Write the feature reference. */
     write_uint32(fp, (uint32_t)n + num_of_unobserved_transitions);
     for (i = 0;i < ref->num_features;++i) {
@@ -508,12 +516,14 @@ int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, 
         if (0 <= fid) write_uint32(fp, (uint32_t)fid);
     }
 
-	for (int i = 0;i < num_of_unobserved_transitions;++i) {
-		fid = fid_map_unobserved[i];
-		write_uint32(fp, (uint32_t)fid);
+	for (int j = 0;j < num_of_labels;++j) {
+		if (fid_map_unobserved[target_transition*num_of_labels + j] != -1) {
+			fid = fid_map_unobserved[target_transition*num_of_labels + j];
+			write_uint32(fp, (uint32_t)fid);
+		}
 	}
 
-    return 0;
+	return 0;
 }
 
 int crf1dmw_open_attrrefs(crf1dmw_t* writer, int num_attrs)

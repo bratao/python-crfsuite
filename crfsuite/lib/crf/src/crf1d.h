@@ -334,7 +334,7 @@ int crf1dmw_close_attrs(crf1dmw_t* writer);
 int crf1dmw_put_attr(crf1dmw_t* writer, int aid, const char *value);
 int crf1dmw_open_labelrefs(crf1dmw_t* writer, int num_labels);
 int crf1dmw_close_labelrefs(crf1dmw_t* writer);
-int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, int *map, int num_of_unobserved_transitions, int *fid_map_unobserved);
+int crf1dmw_put_labelref(crf1dmw_t* writer, int lid, const feature_refs_t* ref, int *map, int num_of_labels, int *fid_map_unobserved);
 int crf1dmw_open_attrrefs(crf1dmw_t* writer, int num_attrs);
 int crf1dmw_close_attrrefs(crf1dmw_t* writer);
 int crf1dmw_put_attrref(crf1dmw_t* writer, int aid, const feature_refs_t* ref, int *map);

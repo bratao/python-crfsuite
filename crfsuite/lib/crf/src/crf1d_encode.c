@@ -542,18 +542,22 @@ crf1de_save_model(
     const int K = crf1de->num_features;
     int J = 0, B = 0;
 
+	// Create the array to hold the feature id position
+	int *fid_map_unobserved = (int*)calloc(L*L, sizeof(int));
+
 	/* Get number of not seen transitions */
 	int num_of_unobserved_transitions = 0;
 	for (int i = 0;i < L;++i) {
 		for (int j = 0;j < L;++j) {
 			if(observed_transitions[i*L + j] == 0){
 				num_of_unobserved_transitions++;
+				//printf("%i - %i  - Was unobserved\n", i, j);
 			}
+			fid_map_unobserved[i*L + j] = -1;
 		}
 	}
 
-	// Create the array to hold the feature id position
-	int *fid_map_unobserved = (int*)calloc(num_of_unobserved_transitions, sizeof(int));
+	
 
     /* Start storing the model. */
     logging(lg, "Storing the model\n");
@@ -643,7 +647,7 @@ crf1de_save_model(
 				crf1dm_feature_t feat;
 				int write_pos = k + u;
 				fmap[write_pos] = J++;   
-				fid_map_unobserved[u] = fmap[write_pos];
+				fid_map_unobserved[i*L + j] = fmap[write_pos];
 				u++;
 
 				feat.type = FT_TRANS;
@@ -717,7 +721,7 @@ crf1de_save_model(
     }
     for (l = 0;l < L;++l) {
         edge = TRANSITION(crf1de, l);
-        if (ret = crf1dmw_put_labelref(writer, l, edge, fmap, num_of_unobserved_transitions, fid_map_unobserved)) {
+        if (ret = crf1dmw_put_labelref(writer, l, edge, fmap, L, fid_map_unobserved)) {
             goto error_exit;
         }
     }
