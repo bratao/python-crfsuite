@@ -44,11 +44,11 @@ ext_modules = [Extension('pycrfsuite._pycrfsuite',
 
 setup(
     name='python-crfsuite-openmp',
-    version="1.0.3",
+    version="1.0.4",
     description="Python binding for CRFsuite wih OpenMP build",
     long_description=open('README.rst').read(),
     author="Bruno Cabral, Terry Peng, Mikhail Korobov",
-    author_email="brunp@potelo.com.br, pengtaoo@gmail.com, kmike84@gmail.com",
+    author_email="bruno@potelo.com.br, pengtaoo@gmail.com, kmike84@gmail.com",
     license="MIT",
     url='https://github.com/bratao/python-crfsuite',
     classifiers=[

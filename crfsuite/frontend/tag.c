@@ -318,16 +318,12 @@ static int tag(tagger_option_t* opt, crfsuite_model_t* model)
                     /* Associate the attribute with the current item. */
                     if (token->value && *token->value) {
                         crfsuite_attribute_set(&cont, aid, atof(token->value));
-						printf("VOU SETAR O VALOR\n", aid);
                     } else {
                         crfsuite_attribute_set(&cont, aid, 1.0);
-						printf("%s - %i\n", token->attr, aid);
                     }
                     crfsuite_item_append_attribute(&item, &cont);
                 }
-				else {
-					printf("%s - SEM VALOR\n", token->attr, aid);
-				}
+				
             }
             break;
         case IWA_NONE:

@@ -770,6 +770,7 @@ error_exit:
 
 static int crf1de_exchange_options(crfsuite_params_t* params, crf1de_option_t* opt, int mode)
 {
+	int num_threads = 1;
     BEGIN_PARAM_MAP(params, mode)
         DDX_PARAM_FLOAT(
             "feature.minfreq", opt->feature_minfreq, 0.0,
@@ -783,8 +784,12 @@ static int crf1de_exchange_options(crfsuite_params_t* params, crf1de_option_t* o
             "feature.possible_transitions", opt->feature_possible_transitions, 0,
             "Force to generate possible transition features. If not set, we're going to HEAVLY penalize unseen transitions"
             )
+		DDX_PARAM_INT(
+			"num_threads", num_threads, 1,
+			"Number of threads"
+		)
     END_PARAM_MAP()
-
+	omp_set_num_threads(num_threads);
     return 0;
 }
 
@@ -981,7 +986,6 @@ static int encoder_score(encoder_t *self, const int *path, floatval_t *ptr_score
 /* LEVEL_INSTANCE -> LEVEL_INSTANCE. */
 static int encoder_viterbi(encoder_t *self, int *path, floatval_t *ptr_score)
 {
-    int i;
     floatval_t score;
     crf1de_t *crf1de = (crf1de_t*)self->internal;
     score = crf1dc_viterbi(crf1de->ctx, path);
