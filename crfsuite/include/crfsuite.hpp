@@ -44,6 +44,56 @@
 namespace CRFSuite
 {
 
+	ItemSequence full_make_patterns(const Patterns& patterns, const ItemSequence& xseq)
+	{
+		ItemSequence item_sequence;
+		for (size_t i_seq = 0;i_seq < xseq.size();++i_seq) {
+			item_sequence.push_back(make_patterns(patterns, xseq, i_seq));
+		}
+		return item_sequence;
+	}
+
+	Item make_patterns(const Patterns& patterns, const ItemSequence& xseq, int i_seq)
+	{
+		Item item_to_return;
+		for (size_t i_pattern = 0;i_pattern < patterns.size();++i_pattern) {
+
+			auto pat = patterns[i_pattern];
+
+			std::string actual_feature = std::to_string(i_pattern);
+
+			bool invalid_feature = false;
+
+			for (size_t i_line_pattern = 0;i_line_pattern < pat.lines.size();++i_line_pattern) {
+
+				int pos_to_access = i_seq + pat.lines[i_line_pattern];
+
+				if ((pos_to_access >= xseq.size()) || (pos_to_access < 0))
+				{
+					invalid_feature = true;
+					//printf("QUEBROU: %i %s \n", pos_to_access,  actual_feature.c_str());
+					break;
+				}
+
+				for (size_t i_col_pattern = 0;i_col_pattern < pat.columns.size();++i_col_pattern) 
+				{
+						actual_feature += "_" + xseq[pos_to_access][pat.columns[i_col_pattern]].attr;
+						//printf("1 a mais %s \n", actual_feature.c_str());
+				}
+
+			}
+
+			if (!invalid_feature) {
+				//printf("SEQ:%i = feature: %s \n", i_seq, actual_feature.c_str());
+				item_to_return.push_back(Attribute(actual_feature, 1));
+			}
+
+		}
+		return item_to_return;
+	}
+
+
+
 Trainer::Trainer()
 {
     data = new crfsuite_data_t;
@@ -101,6 +151,46 @@ void Trainer::clear()
         crfsuite_data_finish(data);
         crfsuite_data_init(data);
     }
+}
+
+void Trainer::append_pattern(const ItemSequence& xseq, const StringList& yseq, const Patterns& patterns,  int group)
+{
+	// Create dictionary objects if necessary.
+	if (data->attrs == NULL || data->labels == NULL) {
+		init();
+	}
+
+	// Make sure |y| == |x|.
+	if (xseq.size() != yseq.size()) {
+		std::stringstream ss;
+		ss << "The numbers of items and labels differ: |x| = " << xseq.size() << ", |y| = " << yseq.size();
+		throw std::invalid_argument(ss.str());
+	}
+
+	// Convert instance_type to crfsuite_instance_t.
+	crfsuite_instance_t _inst;
+	crfsuite_instance_init_n(&_inst, xseq.size());
+	for (size_t t = 0;t < xseq.size();++t) {
+		const Item& item = make_patterns(patterns, xseq, t);
+		crfsuite_item_t* _item = &_inst.items[t];
+
+		// Set the attributes in the item.
+		crfsuite_item_init_n(_item, item.size());
+		for (size_t i = 0;i < item.size();++i) {
+			_item->contents[i].aid = data->attrs->get(data->attrs, item[i].attr.c_str());
+			_item->contents[i].value = (floatval_t)item[i].value;
+		}
+
+		// Set the label of the item.
+		_inst.labels[t] = data->labels->get(data->labels, yseq[t].c_str());
+	}
+	_inst.group = group;
+
+	// Append the instance to the training set.
+	crfsuite_data_append(data, &_inst);
+
+	// Finish the instance.
+	crfsuite_instance_finish(&_inst);
 }
 
 void Trainer::append(const ItemSequence& xseq, const StringList& yseq, int group)
@@ -409,6 +499,52 @@ void Tagger::set(const ItemSequence& xseq)
 
     crfsuite_instance_finish(&_inst);
     attrs->release(attrs);
+}
+
+void Tagger::set_pattern(const ItemSequence& xseq, const Patterns& patterns)
+{
+	int ret;
+	StringList yseq;
+	crfsuite_instance_t _inst;
+	crfsuite_dictionary_t *attrs = NULL;
+
+	if (model == NULL || tagger == NULL) {
+		throw std::invalid_argument("The tagger is not opened");
+	}
+
+	// Obtain the dictionary interface representing the attributes in the model.
+	if ((ret = model->get_attrs(model, &attrs))) {
+		throw std::runtime_error("Failed to obtain the dictionary interface for attributes");
+	}
+
+	// Build an instance.
+	crfsuite_instance_init_n(&_inst, xseq.size());
+	for (size_t t = 0;t < xseq.size();++t) {
+		const Item& item = make_patterns(patterns, xseq, t);
+		
+		crfsuite_item_t* _item = &_inst.items[t];
+
+		// Set the attributes in the item.
+		crfsuite_item_init(_item);
+		for (size_t i = 0;i < item.size();++i) {
+			int aid = attrs->to_id(attrs, item[i].attr.c_str());
+			if (0 <= aid) {
+				crfsuite_attribute_t cont;
+				crfsuite_attribute_set(&cont, aid, item[i].value);
+				crfsuite_item_append_attribute(_item, &cont);
+			}
+		}
+	}
+
+	// Set the instance to the tagger.
+	if ((ret = tagger->set(tagger, &_inst))) {
+		crfsuite_instance_finish(&_inst);
+		attrs->release(attrs);
+		throw std::runtime_error("Failed to set the instance to the tagger.");
+	}
+
+	crfsuite_instance_finish(&_inst);
+	attrs->release(attrs);
 }
 
 StringList Tagger::viterbi()

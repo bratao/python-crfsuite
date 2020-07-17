@@ -85,6 +85,20 @@ cdef crfsuite_api.Item to_item(x) except+:
 
     return c_item
 
+cdef crfsuite_api.Patterns to_pattern(py_pattern) except+:
+    cdef crfsuite_api.Patterns c_patterns
+    cdef crfsuite_api.Pattern c_pattern
+
+    for column, lines in py_pattern:
+        c_pattern = crfsuite_api.Pattern
+
+        c_pattern.columns.push_back(column)
+
+        for line in lines:
+            c_pattern.lines.push_back(line)
+
+        c_patterns.push_back(c_pattern)
+    return c_patterns
 
 cdef crfsuite_api.ItemSequence to_seq(pyseq) except+:
     """
@@ -108,7 +122,6 @@ cdef crfsuite_api.ItemSequence to_seq(pyseq) except+:
         for x in pyseq:
             c_seq.push_back(to_item(x))
     return c_seq
-
 
 cdef class ItemSequence(object):
     """
@@ -317,6 +330,30 @@ cdef class BaseTrainer(object):
             select subset of data for heldout evaluation.
         """
         self.c_trainer.append(to_seq(xseq), yseq, group)
+
+    def append_pattern(self, xseq, yseq, pattern, int group=0):
+        """
+        Append an instance (item/label sequence) to the data set.
+
+        Parameters
+        ----------
+        xseq : a sequence of item features
+            The item sequence of the instance. ``xseq`` should be a list
+            of item features or an :class:`~ItemSequence` instance.
+            Allowed item features formats are the same as described
+            in :class:`~ItemSequence` docs.
+
+        yseq : a sequence of strings
+            The label sequence of the instance. The number
+            of elements in yseq must be identical to that
+            in xseq.
+
+        group : int, optional
+            The group number of the instance. Group numbers are used to
+            select subset of data for heldout evaluation.
+        """
+        self.c_trainer.append_pattern(to_seq(xseq), yseq, to_pattern(pattern), group)
+
 
     def select(self, algorithm, type='crf1d'):
         """
@@ -693,6 +730,26 @@ cdef class Tagger(object):
 
         """
         self.c_tagger.set(to_seq(xseq))
+
+    cpdef set_pattern(self, xseq, pattern) except +:
+        """
+        Set an instance (item sequence) for future calls of
+        :meth:`Tagger.tag`, :meth:`Tagger.probability`
+        and :meth:`Tagger.marginal` methods.
+
+        Parameters
+        ----------
+        xseq : item sequence
+            The item sequence of the instance. ``xseq`` should be a list of
+            item features or an :class:`~ItemSequence` instance.
+            Allowed item features formats are the same as described
+            in :class:`~ItemSequence` docs.
+        
+        pattern: pattern
+            The pattern to apply
+        
+        """
+        self.c_tagger.set_pattern(to_seq(xseq), to_pattern(pattern))
 
     def dump(self, filename=None):
         """

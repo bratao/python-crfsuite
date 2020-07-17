@@ -1,6 +1,15 @@
 Changes
 =======
 
+1.0.5 (2018-12-13)
+------------------
+* Add support for pattern feature generation
+
+
+1.0.4 (2018-11-01)
+------------------
+* Add support for Multiple Processor run
+
 0.9.6 (2018-08-01)
 ------------------
 

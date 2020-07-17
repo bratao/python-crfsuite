@@ -149,7 +149,14 @@ public:
     }
 };
 
+class Pattern {
+public:
+	std::vector<int> lines;
+	std::vector<int> columns;
 
+};
+
+typedef std::vector<Pattern> Patterns;
 
 /**
  * Type of an item (equivalent to an attribute vector) in a sequence.
@@ -167,6 +174,9 @@ typedef std::vector<Item>  ItemSequence;
 typedef std::vector<std::string> StringList;
 
 
+Item make_patterns(const Patterns& patterns, const ItemSequence& item_sequence, int i_seq);
+
+ItemSequence full_make_patterns(const Patterns& patterns, const ItemSequence& item_sequence);
 
 
 /**
@@ -213,6 +223,8 @@ public:
      *  @throw  std::runtime_error      Out of memory.
      */
     void append(const ItemSequence& xseq, const StringList& yseq, int group);
+
+	void append_pattern(const ItemSequence& xseq, const StringList& yseq, const Patterns& patterns, int group);
 
     /**
      * Initialize the training algorithm.
@@ -371,6 +383,10 @@ public:
      *  @throw  std::runtime_error      An internal error.
      */
     void set(const ItemSequence& xseq);
+
+
+	void set_pattern(const ItemSequence& xseq, const Patterns& patterns);
+
 
     /**
      * Find the Viterbi label sequence for the item sequence.

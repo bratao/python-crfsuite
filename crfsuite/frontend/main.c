@@ -91,7 +91,7 @@ static void show_usage(FILE *fp, const char *argv0)
 }
 
 
-int main(int argc, char *argv[])
+int main_out(int argc, char *argv[])
 {
     option_t opt;
     int arg_used = 0;

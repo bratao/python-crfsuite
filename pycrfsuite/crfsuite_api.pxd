@@ -22,11 +22,18 @@ cdef extern from "../crfsuite/include/crfsuite_api.hpp" namespace "CRFSuite":
         Attribute(string)
         Attribute(string, double)
 
+    cdef cppclass Pattern:
+        vector[int] lines
+        vector[int] columns
+
+    ctypedef vector[Pattern] Patterns
     ctypedef vector[Attribute] Item
     ctypedef vector[Item] ItemSequence
     ctypedef vector[string] StringList
 
     cdef string version()
+    cdef Item make_patterns(Patterns, ItemSequence, int)
+    cdef ItemSequence full_make_patterns(Patterns, ItemSequence)
 
 
 cdef extern from "trainer_wrapper.hpp" namespace "CRFSuiteWrapper":
@@ -38,6 +45,7 @@ cdef extern from "trainer_wrapper.hpp" namespace "CRFSuiteWrapper":
         void set_handler(object, messagefunc) except +
         void clear() except +
         void append(ItemSequence, StringList, int) except +
+        void append_pattern(ItemSequence, StringList, Patterns, int) except +
         bint select(string, string) except +
         int train(string, int) except +
         StringList params() except +
@@ -59,6 +67,7 @@ cdef extern from "tagger_wrapper.hpp" namespace "CRFSuiteWrapper":
         StringList labels() except +
         StringList tag(ItemSequence) except +
         void set(ItemSequence) except +
+        void set_pattern(ItemSequence, Patterns) except +
         StringList viterbi() except +
         double probability(StringList) except +
         double marginal(string, int) except +
